@@ -1,4 +1,4 @@
-package com.skilldistillery.blackjack.data;
+package com.skilldistillery.cards.common;
 
 public class DeckOfCards {
 	public static char [][] Deck= new char [52][2]; 

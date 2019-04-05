@@ -1,4 +1,4 @@
-package com.skilldistillery.blackjack.data;
+package com.skilldistillery.cards.common;
 
 public class Card {
 	private String suit;
