@@ -12,8 +12,10 @@ public class Dealer{
 	BlackjackHand hand;
 	Deck deck;
 
-	public Dealer(Deck deck) {
-		this.deck = deck;
+	public Dealer() {
+		deck = new Deck();
+		deck.shuffle();
+		hand = new BlackjackHand();
 		pickName();
 	}
 
@@ -55,32 +57,18 @@ public class Dealer{
 
 	}
 
-	public List<Card> dealHand() {
-		List<Card> startingHand = new ArrayList<>();
-		startingHand.add(deck.dealCard());
-		return startingHand;
+	public void addCard() {
+		hand.addCard(dealCard());
 	}
 
 	public Card dealCard() {
 		return deck.dealCard();
 	}
-
-	public void newHand() {
-		if (deck.checkDeckSize() > 15) {
-			hand.clearHand();
-			List<Card> temp = dealHand();
-			for (Card card : temp) {
-				hand.addCard(card);
-			}
-		} else {
-			deck = new Deck();
-			deck.shuffle();
-			hand.clearHand();
-			List<Card> temp = dealHand();
-			for (Card card : temp) {
-				hand.addCard(card);
-			}
+	public boolean checkBust() {
+		if(hand.handValue()>21) {
+			return true;
 		}
+		return false;
 	}
 
 }

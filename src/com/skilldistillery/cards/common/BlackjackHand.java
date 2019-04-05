@@ -13,11 +13,21 @@ public class BlackjackHand extends Hand {
 		hand.add(card);
 	}
 	public void clearHand() {
-		hand= new ArrayList<>();
+		hand= new ArrayList<Card>();
 	}
 	public List<Card> getCards(){
 		return hand;
 		
+	}
+	public int handValue() {
+		int total=0;
+		for (Card card : hand) {
+			total+= card.getValue();
+		}
+		return total;
+	}
+	public int checkHandSize() {
+		return hand.size();
 	}
 
 }
