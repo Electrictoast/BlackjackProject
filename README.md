@@ -1,5 +1,5 @@
 # Blackjack Project
-####Skill Distillery homework - week 4
+#### Skill Distillery homework - week 4
 
 ### Overview
 (Description, running the project, UML diagram)
