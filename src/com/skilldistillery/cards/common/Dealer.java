@@ -17,21 +17,26 @@ public class Dealer{
 		deck.shuffle();
 		hand = new BlackjackHand();
 		pickName();
+		System.out.println("Your dealer today will be "+name+".");
 	}
 
 	public boolean playHand(Player player) {
 		boolean bust = false;
+		Card temp = null;
 		
+		System.out.println(name+ ": My turn!");
 		do {
 		if(hand.handValue()<17&&hand.handValue()<player.hand.handValue())
-			addCard();
+			System.out.println(name + ": Guess I'll draw a card");
+			temp = addCard();
 		if(hand.handValue()>21) {
 			bust = true;
 		}
-		showHand();
+		System.out.println(temp.toString());
 		if (bust) {
-			System.out.println(name+ ": Oh no! I busted");
 			showTrueHand();
+			System.out.println(name +": Thats "+hand.handValue());
+			System.out.println(name+ ": Oh no! I busted");
 		}
 		}while(hand.handValue()<17 && !bust);
 		
@@ -77,8 +82,9 @@ public class Dealer{
 
 	}
 
-	public void addCard() {
-		hand.addCard(dealCard());
+	public Card addCard() {
+		Card temp = hand.addCard(dealCard());
+		return temp;
 	}
 
 	public Card dealCard() {
@@ -89,6 +95,14 @@ public class Dealer{
 			return true;
 		}
 		return false;
+	}
+	public void changeDeck() {
+		System.out.println(name + ": Wow you really like this game.");
+		System.out.println("Lets grab a new deck!");
+		deck = new Deck();
+	}
+	public int getDeckSize() {
+		return deck.checkDeckSize();
 	}
 
 }

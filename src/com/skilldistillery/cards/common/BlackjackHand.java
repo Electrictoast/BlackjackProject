@@ -9,8 +9,9 @@ public class BlackjackHand extends Hand {
 	public BlackjackHand() {
 		
 	}
-	public void addCard(Card card) {
+	public Card addCard(Card card) {
 		hand.add(card);
+		return card;
 	}
 	public void clearHand() {
 		hand= new ArrayList<Card>();

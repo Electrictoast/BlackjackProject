@@ -7,17 +7,19 @@ public class Player {
 	public String name;
 	public BlackjackHand hand;
 
-	public Player(Scanner sc) {
-		System.out.println("What is your name?");
+	public Player(Dealer dealer, Scanner sc) {
+		System.out.println(dealer.name+ ": Welcome!");
+		System.out.println(dealer.name+ ": What is your name?");
 		name = sc.nextLine();
+		System.out.println(dealer.name + ": Nice to meet you "+ name +" lets play some Blackjack!");
 		hand = new BlackjackHand();
 	}
 
 	public boolean playHand(Scanner sc, Dealer dealer) {
 		boolean bust = false;
 		boolean stay = false;
-		System.out.println("The dealer passes you two cards");
-		System.out.println("What would you like to do?");
+		System.out.println(dealer.name +" passes you two cards");
+		System.out.println(dealer.name+ ": What would you like to do?");
 		while (!bust && !stay) {
 			stay = actionMenu(menu(sc), dealer);
 			bust = checkBust();
@@ -36,8 +38,9 @@ public class Player {
 		hand.addCard(card);
 	}
 
-	public boolean checkPlayAgain(Scanner sc) {
-		System.out.println("Would you like to play again?");
+	public boolean checkPlayAgain(Dealer dealer, Scanner sc) {
+		System.out.println(dealer.name + ": Would you like to play again?");
+		System.out.print("(yes/no)\t");
 		if(sc.nextLine().toUpperCase().equals("YES")) {
 			return true;
 		}else {
@@ -48,14 +51,15 @@ public class Player {
 	public int menu(Scanner sc) {
 		boolean valid = false;
 		int choice = 0;
-		System.out.println("1. Check your hand");
-		System.out.println("2. Check dealers hand");
-		System.out.println("3. Hit");
-		System.out.println("4. Stay");
+		System.out.println("Press enter to continue");
+		sc.nextLine();
+		System.out.println("1. Check cards");
+		System.out.println("2. Hit");
+		System.out.println("3. Stay");
 		while (!valid) {
 			try {
 				choice = Integer.parseInt(sc.nextLine());
-				if (choice < 0 || choice > 4) {
+				if (choice < 0 || choice > 3) {
 					throw new Exception();
 				} else {
 					valid = true;
@@ -66,7 +70,8 @@ public class Player {
 				valid = false;
 			}
 		}
-
+		System.out.println();
+		sc.nextLine();
 		return choice;
 	}
 
@@ -74,15 +79,19 @@ public class Player {
 		boolean stay = false;
 		switch (choice) {
 		case 1:
+			System.out.println("Your cards:");
 			showHand();
+			System.out.println();
+			System.out.println(dealer.name + " has:");
+			dealer.showHand();
+			System.out.println();
 			break;
 		case 2:
-			dealer.showHand();
+			Card newCard = dealer.dealCard();
+			hand.addCard(newCard);
+			System.out.println(dealer.name+" hands you a "+ newCard.toString());
 			break;
 		case 3:
-			hand.addCard(dealer.dealCard());
-			break;
-		case 4:
 			stay = true;
 			break;
 		}

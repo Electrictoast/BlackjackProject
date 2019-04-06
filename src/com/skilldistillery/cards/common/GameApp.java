@@ -7,43 +7,57 @@ public class GameApp {
 
 	public static void main(String[] args) {
 		GameApp a = new GameApp();
-		Player player = new Player(sc);
+		System.out.println("#=================#");
+		System.out.println("\"                 \"");
+		System.out.println("\"    BLACKJACK    \"");
+		System.out.println("\"                 \"");
+		System.out.println("#=================#");
+		
 		Dealer dealer = new Dealer();
+		Player player = new Player(dealer,sc);
 		a.run(player, dealer);
 	}
 	public void run(Player player, Dealer dealer) {
 		boolean playAgain = false;
-		start(player, dealer);
 		do {
 			playAgain=playRound(player,dealer);
 		}while(playAgain==true);
 		
 	}
-	public void start(Player player, Dealer dealer) {
-		System.out.println("Welcome "+player.name+"!");
-		System.out.println("Your dealer today will be "+dealer.name+".");
-	}
 	public boolean playRound(Player player, Dealer dealer) {
 		startingDeal(player,dealer);
 		if (player.playHand(sc,dealer)) {
+			System.out.println("Oh no!");
+			player.showHand();
+			System.out.println("Thats "+player.hand.handValue());
 			System.out.println("You busted!");
-			return player.checkPlayAgain(sc);
+			return player.checkPlayAgain(dealer, sc);
 		}
 		if(dealer.playHand(player)) {
-			System.out.println("The dealer busted");
+			System.out.println(dealer.name +" busted");
 			System.out.println("You win!");
-			return player.checkPlayAgain(sc);
+			return player.checkPlayAgain(dealer, sc);
 		}
 		if(player.hand.handValue()>dealer.hand.handValue()) {
 			System.out.println("You win!");
-			return player.checkPlayAgain(sc);
+			System.out.println(dealer.name +" had:");
+			dealer.showTrueHand();
+			return player.checkPlayAgain(dealer, sc);
 		}else {
-			System.out.println("Dealer wins...");
-			return player.checkPlayAgain(sc);
+			System.out.println(dealer.name+": I win");
+			System.out.println(dealer.name+": Better luck next time "+player.name);
+			dealer.showTrueHand();
+			System.out.println(dealer.name+": Thats "+ dealer.hand.handValue());
+			return player.checkPlayAgain(dealer, sc);
 		}
 			
 	}
 	public void startingDeal(Player player, Dealer dealer) {
+		if (dealer.getDeckSize()<12) {
+			dealer.changeDeck();
+		}
+		player.hand.clearHand();
+		dealer.hand.clearHand();
 		player.addCard(dealer.dealCard());
 		dealer.addCard();
 		player.addCard(dealer.dealCard());
