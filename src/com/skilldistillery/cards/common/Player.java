@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Player {
 	public String name;
-	private BlackjackHand hand;
+	public BlackjackHand hand;
 
 	public Player(Scanner sc) {
 		System.out.println("What is your name?");
@@ -36,8 +36,13 @@ public class Player {
 		hand.addCard(card);
 	}
 
-	public boolean checkPlayAgain() {
+	public boolean checkPlayAgain(Scanner sc) {
+		System.out.println("Would you like to play again?");
+		if(sc.nextLine().toUpperCase().equals("YES")) {
+			return true;
+		}else {
 		return false;
+		}
 	}
 
 	public int menu(Scanner sc) {

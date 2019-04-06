@@ -24,19 +24,30 @@ public class GameApp {
 		System.out.println("Your dealer today will be "+dealer.name+".");
 	}
 	public boolean playRound(Player player, Dealer dealer) {
-//		dealer.newHand();
 		startingDeal(player,dealer);
-		player.playHand(sc,dealer);
-		dealer.playHand();
-		return player.checkPlayAgain();
+		if (player.playHand(sc,dealer)) {
+			System.out.println("You busted!");
+			return player.checkPlayAgain(sc);
+		}
+		if(dealer.playHand(player)) {
+			System.out.println("The dealer busted");
+			System.out.println("You win!");
+			return player.checkPlayAgain(sc);
+		}
+		if(player.hand.handValue()>dealer.hand.handValue()) {
+			System.out.println("You win!");
+			return player.checkPlayAgain(sc);
+		}else {
+			System.out.println("Dealer wins...");
+			return player.checkPlayAgain(sc);
+		}
+			
 	}
 	public void startingDeal(Player player, Dealer dealer) {
 		player.addCard(dealer.dealCard());
 		dealer.addCard();
 		player.addCard(dealer.dealCard());
 		dealer.addCard();
-		player.showHand();
-		dealer.showHand();
 		
 	}
 

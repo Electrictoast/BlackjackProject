@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dealer{
-	String name;
-	BlackjackHand hand;
-	Deck deck;
+	public String name;
+	public BlackjackHand hand;
+	private Deck deck;
 
 	public Dealer() {
 		deck = new Deck();
@@ -19,9 +19,23 @@ public class Dealer{
 		pickName();
 	}
 
-	public void playHand() {
-		// logic for dealer
-
+	public boolean playHand(Player player) {
+		boolean bust = false;
+		
+		do {
+		if(hand.handValue()<17&&hand.handValue()<player.hand.handValue())
+			addCard();
+		if(hand.handValue()>21) {
+			bust = true;
+		}
+		showHand();
+		if (bust) {
+			System.out.println(name+ ": Oh no! I busted");
+			showTrueHand();
+		}
+		}while(hand.handValue()<17 && !bust);
+		
+		return bust;
 	}
 
 	public void showHand() {
@@ -31,8 +45,14 @@ public class Dealer{
 			if (counter++ > 0) {
 				System.out.println(card.toString());
 			} else {
-				System.out.println("Dealer has a mystery card");
+				System.out.println("Mystery card");
 			}
+		}
+	}
+	public void showTrueHand() {
+		List<Card> temp = hand.getCards();
+		for (Card card : temp) {
+				System.out.println(card.toString());
 		}
 	}
 
