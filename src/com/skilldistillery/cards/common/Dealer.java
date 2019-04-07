@@ -11,6 +11,7 @@ public class Dealer{
 	public String name;
 	public BlackjackHand hand;
 	private Deck deck;
+	public CardtoAscii converter = new CardtoAscii();
 
 	public Dealer() {
 		deck = new Deck();
@@ -34,7 +35,8 @@ public class Dealer{
 		}
 		System.out.println(temp.toString());
 		if (bust) {
-			showTrueHand();
+//			showTrueHand();
+			converter.printHand(hand.getCards(), "Player");
 			System.out.println(name +": Thats "+hand.handValue());
 			System.out.println(name+ ": Oh no! I busted");
 		}
@@ -97,12 +99,16 @@ public class Dealer{
 		return false;
 	}
 	public void changeDeck() {
+		System.out.println();
 		System.out.println(name + ": Wow you really like this game.");
 		System.out.println("Lets grab a new deck!");
 		deck = new Deck();
 	}
 	public int getDeckSize() {
 		return deck.checkDeckSize();
+	}
+	public List<Card> getHand(){
+		return hand.getCards();
 	}
 
 }
