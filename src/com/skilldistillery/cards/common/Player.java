@@ -84,7 +84,7 @@ public class Player {
 			System.out.println();
 			System.out.println(dealer.name + " has:");
 //			dealer.showHand();
-			converter.printHand(dealer.getHand(), "Dealer");
+			converter.printHand(dealer.getHand(), "Hide");
 			System.out.println();
 			System.out.println("Press enter to continue");
 			sc.nextLine();

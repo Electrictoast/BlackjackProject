@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CardtoAscii {
 	public List<Card> hand;
-	public StringBuilder[] cardBuilder;
+	public List<StringBuilder> cardBuilder;
 
 	public CardtoAscii() {
 
@@ -18,124 +18,112 @@ public class CardtoAscii {
 
 	private void initConverter(List<Card> cards) {
 		setCards(cards);
-		cardBuilder = new StringBuilder[11];
-		StringBuilder lineA = new StringBuilder();
-		StringBuilder lineB = new StringBuilder();
-		StringBuilder lineC = new StringBuilder();
-		StringBuilder lineD = new StringBuilder();
-		StringBuilder lineE = new StringBuilder();
-		StringBuilder lineF = new StringBuilder();
-		StringBuilder lineG = new StringBuilder();
-		StringBuilder lineH = new StringBuilder();
-		StringBuilder lineI = new StringBuilder();
-		StringBuilder lineJ = new StringBuilder();
-		StringBuilder lineK = new StringBuilder();
-		cardBuilder[0] = lineA;
-		cardBuilder[1] = lineB;
-		cardBuilder[2] = lineC;
-		cardBuilder[3] = lineD;
-		cardBuilder[4] = lineE;
-		cardBuilder[5] = lineF;
-		cardBuilder[6] = lineG;
-		cardBuilder[7] = lineH;
-		cardBuilder[8] = lineI;
-		cardBuilder[9] = lineJ;
-		cardBuilder[10] = lineK;
+		cardBuilder = new ArrayList<StringBuilder>();
+		for (int i = 0; i < 11; i++) {
+			cardBuilder.add(new StringBuilder());
+		}
 
 	}
 
 	private void firstCard() {
-		cardBuilder[0].append("-------------");
-		cardBuilder[1].append("|         ax|");
-		cardBuilder[2].append("|           |");
-		cardBuilder[3].append("|  *******  |");
-		cardBuilder[4].append("|  *******  |");
-		cardBuilder[5].append("|  *******  |");
-		cardBuilder[6].append("|  *******  |");
-		cardBuilder[7].append("|  *******  |");
-		cardBuilder[8].append("|           |");
-		cardBuilder[9].append("|ax         |");
-		cardBuilder[10].append("-------------");
+		cardBuilder.get(0).append(",-----------,");
+		cardBuilder.get(1).append("|         ax|");
+		cardBuilder.get(2).append("|           |");
+		cardBuilder.get(3).append("|  *******  |");
+		cardBuilder.get(4).append("|  *******  |");
+		cardBuilder.get(5).append("|  *******  |");
+		cardBuilder.get(6).append("|  *******  |");
+		cardBuilder.get(7).append("|  *******  |");
+		cardBuilder.get(8).append("|           |");
+		cardBuilder.get(9).append("|ax         |");
+		cardBuilder.get(10).append("'-----------'");
 	}
 
 	private void dealerFirstCard() {
-		cardBuilder[0].append("-------------");
-		cardBuilder[1].append("|###########|");
-		cardBuilder[2].append("|#*********#|");
-		cardBuilder[3].append("|#*********#|");
-		cardBuilder[4].append("|#*********#|");
-		cardBuilder[5].append("|#*********#|");
-		cardBuilder[6].append("|#*********#|");
-		cardBuilder[7].append("|#*********#|");
-		cardBuilder[8].append("|#*********#|");
-		cardBuilder[9].append("|###########|");
-		cardBuilder[10].append("-------------");
+		cardBuilder.get(0).append(",-----------,");
+		cardBuilder.get(1).append("|###########|");
+		cardBuilder.get(2).append("|#*********#|");
+		cardBuilder.get(3).append("|#*********#|");
+		cardBuilder.get(4).append("|#*********#|");
+		cardBuilder.get(5).append("|#*********#|");
+		cardBuilder.get(6).append("|#*********#|");
+		cardBuilder.get(7).append("|#*********#|");
+		cardBuilder.get(8).append("|#*********#|");
+		cardBuilder.get(9).append("|###########|");
+		cardBuilder.get(10).append("'-----------'");
 
 	}
 
-	private void addCard() {
-		cardBuilder[0].append("---");
-		cardBuilder[1].append("ax|");
-		cardBuilder[2].append("  |");
-		cardBuilder[3].append("  |");
-		cardBuilder[4].append("  |");
-		cardBuilder[5].append("  |");
-		cardBuilder[6].append("  |");
-		cardBuilder[7].append("  |");
-		cardBuilder[8].append("  |");
-		cardBuilder[9].append("  |");
-		cardBuilder[10].append("---");
-
-	}
-
-	private void fillSuitAndNumber(Card card, String playerOrDealer, int counter) {
-		cardBuilder[1].replace(0, cardBuilder[1].length(),
-				cardBuilder[1].toString().replaceAll("a", "" + card.getRank()));
-		cardBuilder[1].replace(0, cardBuilder[1].length(),
-				cardBuilder[1].toString().replaceAll("x", "" + card.getSuitChar()));
-
-		if (playerOrDealer.equals("Player") && counter < 1) {
-			if (card.getRank().equals("10")) {
-				cardBuilder[9].replace(0, cardBuilder[9].length(),
-						cardBuilder[9].replace(1, 4, "" + card.getRank() + card.getSuitChar()).toString());
-
-			} else {
-				cardBuilder[9].replace(0, cardBuilder[9].length(),
-						cardBuilder[9].replace(1, 3, "" + card.getRank() + card.getSuitChar()).toString());
-			}
+	private void addCard(int counter) {
+		cardBuilder.add(new StringBuilder());
+		cardBuilder.get(cardBuilder.size() - 11).append("---,");
+		cardBuilder.get(cardBuilder.size() - 10).append(" ax|");
+		cardBuilder.get(cardBuilder.size() - 9).append("   |");
+		cardBuilder.get(cardBuilder.size() - 8).append("   |");
+		cardBuilder.get(cardBuilder.size() - 7).append("   |");
+		cardBuilder.get(cardBuilder.size() - 6).append("   |");
+		cardBuilder.get(cardBuilder.size() - 5).append("   |");
+		cardBuilder.get(cardBuilder.size() - 4).append("   |");
+		cardBuilder.get(cardBuilder.size() - 3).append("   |");
+		cardBuilder.get(cardBuilder.size() - 2).append("   |");
+		for (int i = 0; i < counter; i++) {
+			cardBuilder.get(cardBuilder.size() - 1).append("    ");
 		}
+		cardBuilder.get(cardBuilder.size() - 1).append("'-----------'");
+
+	}
+
+	private void fillSuitAndNumber(Card card, String showOrHide, int counter) {
+		if (card.getRank().equals("10")) {
+			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
+					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("a", "\b" + card.getRank()));
+			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
+					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("x", "" + card.getSuitChar()));
+
+		} else {
+			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
+					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("a", "" + card.getRank()));
+			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
+					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("x", "" + card.getSuitChar()));
+		}
+
+		cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
+				cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("a", "" + card.getRank()));
+		cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
+				cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("x", "" + card.getSuitChar()));
+
 	}
 
 	private void subHeart() {
-		cardBuilder[3].replace(3, 10, " __ __ ");
-		cardBuilder[4].replace(3, 10, "( \\/  )");
-		cardBuilder[5].replace(3, 10, " \\   / ");
-		cardBuilder[6].replace(3, 10, "  \\ /  ");
-		cardBuilder[7].replace(3, 10, "   '   ");
+		cardBuilder.get(3).replace(3, 10, " __ __ ");
+		cardBuilder.get(4).replace(3, 10, "( \\/  )");
+		cardBuilder.get(5).replace(3, 10, " \\   / ");
+		cardBuilder.get(6).replace(3, 10, "  \\ /  ");
+		cardBuilder.get(7).replace(3, 10, "   '   ");
 	}
 
 	private void subSpade() {
-		cardBuilder[3].replace(3, 10, "   .   ");
-		cardBuilder[4].replace(3, 10, "  / \\  ");
-		cardBuilder[5].replace(3, 10, " /   \\ ");
-		cardBuilder[6].replace(3, 10, "(__ __)");
-		cardBuilder[7].replace(3, 10, "   |   ");
+		cardBuilder.get(3).replace(3, 10, "   .   ");
+		cardBuilder.get(4).replace(3, 10, "  / \\  ");
+		cardBuilder.get(5).replace(3, 10, " /   \\ ");
+		cardBuilder.get(6).replace(3, 10, "(__ __)");
+		cardBuilder.get(7).replace(3, 10, "   |   ");
 	}
 
 	private void subClub() {
-		cardBuilder[3].replace(3, 10, "  ___  ");
-		cardBuilder[4].replace(3, 10, " (   ) ");
-		cardBuilder[5].replace(3, 10, "(_ ' _)");
-		cardBuilder[6].replace(3, 10, "   |   ");
-		cardBuilder[7].replace(3, 10, "       ");
+		cardBuilder.get(3).replace(3, 10, "  ___  ");
+		cardBuilder.get(4).replace(3, 10, " (   ) ");
+		cardBuilder.get(5).replace(3, 10, "(_ ' _)");
+		cardBuilder.get(6).replace(3, 10, "   |   ");
+		cardBuilder.get(7).replace(3, 10, "       ");
 	}
 
 	private void subDiamond() {
-		cardBuilder[3].replace(3, 10, "   .   ");
-		cardBuilder[4].replace(3, 10, "  / \\  ");
-		cardBuilder[5].replace(3, 10, " /   \\ ");
-		cardBuilder[6].replace(3, 10, " \\   / ");
-		cardBuilder[7].replace(3, 10, "  \\ /  ");
+		cardBuilder.get(3).replace(3, 10, "   .   ");
+		cardBuilder.get(4).replace(3, 10, "  / \\  ");
+		cardBuilder.get(5).replace(3, 10, " /   \\ ");
+		cardBuilder.get(6).replace(3, 10, " \\   / ");
+		cardBuilder.get(7).replace(3, 10, "  \\ /  ");
 	}
 
 	private void drawSuit(Card card) {
@@ -154,21 +142,23 @@ public class CardtoAscii {
 		}
 	}
 
-	private void drawHand(String playerOrDealer) {
+	private void drawHand(String showOrHide) {
 		int counter = 0;
+		int counter2 = 1;
 		for (Card card : hand) {
 			if (counter < 1) {
-				if (playerOrDealer.equals("Dealer")) {
+				if (showOrHide.equals("Hide")) {
 					dealerFirstCard();
 				} else {
 					firstCard();
 					drawSuit(card);
 				}
-				fillSuitAndNumber(card, playerOrDealer, counter);
+				fillSuitAndNumber(card, showOrHide, counter);
 				counter++;
 			} else {
-				addCard();
-				fillSuitAndNumber(card, playerOrDealer, counter);
+				addCard(counter2);
+				counter2++;
+				fillSuitAndNumber(card, showOrHide, counter);
 			}
 		}
 		for (StringBuilder sb : cardBuilder) {
@@ -177,9 +167,9 @@ public class CardtoAscii {
 
 	}
 
-	public void printHand(List<Card> hand, String playerOrDealer) {
+	public void printHand(List<Card> hand, String showOrHide) {
 		initConverter(hand);
-		drawHand(playerOrDealer);
+		drawHand(showOrHide);
 	}
 
 }

@@ -15,6 +15,9 @@ public class Dealer{
 
 	public Dealer() {
 		deck = new Deck();
+		for (int i =0; i<8; i++) {
+			deck.addDeck();
+		}
 		deck.shuffle();
 		hand = new BlackjackHand();
 		pickName();
@@ -103,6 +106,10 @@ public class Dealer{
 		System.out.println(name + ": Wow you really like this game.");
 		System.out.println("Lets grab a new deck!");
 		deck = new Deck();
+		for (int i =0; i<8; i++) {
+			deck.addDeck();
+		}
+		
 	}
 	public int getDeckSize() {
 		return deck.checkDeckSize();

@@ -29,10 +29,10 @@ public class GameApp {
 		startingDeal(player,dealer);
 		if(player.hand.handValue()==21) {
 			System.out.println("You got Blackjack!");
-			converter.printHand(player.hand.getCards(), "Player");
+			converter.printHand(player.hand.getCards(), "Show");
 			if(dealer.hand.handValue()==21) {
 				System.out.println("Unfortunately so did "+dealer.name);
-				converter.printHand(dealer.hand.getCards(), "Player");
+				converter.printHand(dealer.hand.getCards(), "Show");
 				System.out.println(dealer.name+ ": Too bad");
 				return player.checkPlayAgain(dealer, sc);
 			}
@@ -40,7 +40,7 @@ public class GameApp {
 			return player.checkPlayAgain(dealer, sc);
 		}else if(dealer.hand.handValue()==21) {
 			System.out.println(dealer.name + ": I got Blackjack!");
-			converter.printHand(dealer.hand.getCards(), "Player");
+			converter.printHand(dealer.hand.getCards(), "Show");
 			System.out.println(dealer.name + " wins this round.");
 			return player.checkPlayAgain(dealer, sc);
 
@@ -48,7 +48,7 @@ public class GameApp {
 		if (player.playHand(sc,dealer)) {
 			System.out.println("Oh no!");
 //			player.showHand();
-			converter.printHand(player.hand.getCards(), "Player");
+			converter.printHand(player.hand.getCards(), "Show");
 			System.out.println("Thats "+player.hand.handValue());
 			System.out.println("You busted!");
 			System.out.println();
@@ -63,12 +63,12 @@ public class GameApp {
 			System.out.println("You win!");
 			System.out.println(dealer.name +" had:");
 //			dealer.showTrueHand();
-			converter.printHand(dealer.hand.getCards(), "Player");
+			converter.printHand(dealer.hand.getCards(), "Show");
 			System.out.println();
 			return player.checkPlayAgain(dealer, sc);
 		}else {
 //			dealer.showTrueHand();
-			converter.printHand(dealer.hand.getCards(), "Player");
+			converter.printHand(dealer.hand.getCards(), "Show");
 			System.out.println(dealer.name+": Thats "+ dealer.hand.handValue());
 			System.out.println(dealer.name+": I win");
 			System.out.println(dealer.name+": Better luck next time "+player.name);
