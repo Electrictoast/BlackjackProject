@@ -43,7 +43,7 @@ public class Player {
 	public boolean checkPlayAgain(Dealer dealer, Scanner sc) {
 		System.out.println(dealer.name + ": Would you like to play again?");
 		System.out.print("(yes/no)  ");
-		if(sc.nextLine().toUpperCase().equals("YES")) {
+		if(sc.nextLine().toUpperCase().startsWith("Y")) {
 			return true;
 		}else {
 		return false;

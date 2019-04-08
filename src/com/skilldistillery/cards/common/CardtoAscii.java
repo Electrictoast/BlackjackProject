@@ -86,12 +86,17 @@ public class CardtoAscii {
 			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
 					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("x", "" + card.getSuitChar()));
 		}
-
+		if (card.getRank().equals("10")) {
 		cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
 				cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("a", "" + card.getRank()));
 		cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
 				cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("x", "" + card.getSuitChar()));
-
+		}else {
+			cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
+					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("a", "\b" + card.getRank()));
+			cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
+					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("x", "" + card.getSuitChar()));
+		}
 	}
 
 	private void subHeart() {
