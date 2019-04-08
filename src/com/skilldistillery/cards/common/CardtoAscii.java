@@ -27,7 +27,7 @@ public class CardtoAscii {
 
 	private void firstCard() {
 		cardBuilder.get(0).append(",-----------,");
-		cardBuilder.get(1).append("|         ax|");
+		cardBuilder.get(1).append("|        aax|");
 		cardBuilder.get(2).append("|           |");
 		cardBuilder.get(3).append("|  *******  |");
 		cardBuilder.get(4).append("|  *******  |");
@@ -35,7 +35,7 @@ public class CardtoAscii {
 		cardBuilder.get(6).append("|  *******  |");
 		cardBuilder.get(7).append("|  *******  |");
 		cardBuilder.get(8).append("|           |");
-		cardBuilder.get(9).append("|ax         |");
+		cardBuilder.get(9).append("|aax        |");
 		cardBuilder.get(10).append("'-----------'");
 	}
 
@@ -57,7 +57,7 @@ public class CardtoAscii {
 	private void addCard(int counter) {
 		cardBuilder.add(new StringBuilder());
 		cardBuilder.get(cardBuilder.size() - 11).append("---,");
-		cardBuilder.get(cardBuilder.size() - 10).append(" ax|");
+		cardBuilder.get(cardBuilder.size() - 10).append("aax|");
 		cardBuilder.get(cardBuilder.size() - 9).append("   |");
 		cardBuilder.get(cardBuilder.size() - 8).append("   |");
 		cardBuilder.get(cardBuilder.size() - 7).append("   |");
@@ -76,24 +76,24 @@ public class CardtoAscii {
 	private void fillSuitAndNumber(Card card, String showOrHide, int counter) {
 		if (card.getRank().equals("10")) {
 			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
-					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("a", "\b" + card.getRank()));
+					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("aa", "" + card.getRank()));
 			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
 					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("x", "" + card.getSuitChar()));
 
 		} else {
 			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
-					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("a", "" + card.getRank()));
+					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("aa", " " + card.getRank()));
 			cardBuilder.get(cardBuilder.size() - 10).replace(0, cardBuilder.get(cardBuilder.size() - 10).length(),
 					cardBuilder.get(cardBuilder.size() - 10).toString().replaceAll("x", "" + card.getSuitChar()));
 		}
 		if (card.getRank().equals("10")) {
-		cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
-				cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("a", "" + card.getRank()));
-		cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
-				cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("x", "" + card.getSuitChar()));
+			cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
+					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("aa", "" + card.getRank()));
+			cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
+					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("x", "" + card.getSuitChar()));
 		}else {
 			cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
-					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("a", "\b" + card.getRank()));
+					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("aa", " " + card.getRank()));
 			cardBuilder.get(cardBuilder.size() - 2).replace(0, cardBuilder.get(cardBuilder.size() - 2).length(),
 					cardBuilder.get(cardBuilder.size() - 2).toString().replaceAll("x", "" + card.getSuitChar()));
 		}
